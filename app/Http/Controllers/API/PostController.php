@@ -6,7 +6,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends BaseController
 {
