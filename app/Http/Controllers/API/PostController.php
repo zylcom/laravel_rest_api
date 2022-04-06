@@ -50,7 +50,7 @@ class PostController extends BaseController
   {
     $input = $request->all();
 
-    $validator = Validator::makem($input, [
+    $validator = Validator::make($input, [
       'title' => 'required|max:255',
       'content' => 'required',
     ]);
