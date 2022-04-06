@@ -6,7 +6,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends BaseController
 {
@@ -50,7 +50,7 @@ class PostController extends BaseController
   {
     $input = $request->all();
 
-    $validator = Validator::makem($input, [
+    $validator = Validator::make($input, [
       'title' => 'required|max:255',
       'content' => 'required',
     ]);
