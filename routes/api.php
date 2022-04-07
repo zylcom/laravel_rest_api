@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\LoginController;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\RegisterController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,9 @@ use App\Http\Controllers\API\PostController;
 |
 */
 
-Route::group(['prefix' => '/v1', 'middleware' => 'auth:api'], function () {
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [LoginController::class, 'login']);
+
+Route::group(['prefix' => '/v1', 'middleware' => ['auth:api']], function () {
     Route::resource('posts', PostController::class);
 });
