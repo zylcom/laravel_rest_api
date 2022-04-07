@@ -6,6 +6,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends BaseController
@@ -22,6 +23,7 @@ class PostController extends BaseController
     $input = $request->all();
 
     $validator = Validator::make($input, [
+      'category_id' => 'required',
       'title' => 'required|max:255',
       'content' => 'required',
     ]);
@@ -30,6 +32,7 @@ class PostController extends BaseController
       return $this->sendError('Validation Error.', $validator->errors());
     }
 
+    $input['user_id'] = Auth::user()->id;
     $post = Post::create($input);
 
     return $this->sendResponse(new PostResource($post), 'Post created successfully.');
@@ -37,7 +40,7 @@ class PostController extends BaseController
 
   public function show($id)
   {
-    $post = Post::find($id)->makeHidden(['user_id', 'category_id']);
+    $post = Post::find($id);
 
     if (is_null($post)) {
       return $this->sendError('Post not found.');
