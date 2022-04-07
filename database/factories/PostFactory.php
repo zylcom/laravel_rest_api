@@ -16,12 +16,15 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        static $post_index = 1;
+        static $category_index = 0;
+
         return [
-            'title' => $this->faker->sentence(mt_rand(2, 8)),
-            'content' => $this->faker->paragraphs(mt_rand(5, 10), true),
-            'image' => $this->faker->imageUrl(),
+            'title' => 'Ini Title ' . $post_index,
+            'content' => 'Ini adalah content dari post ' . $post_index,
+            'image' => 'ini-image-' . $post_index++ . '.jpg',
             'user_id' => 1,
-            'category_id' => mt_rand(1, 3),
+            'category_id' => $category_index == 3 ? $category_index = 1 : ++$category_index,
         ];
     }
 }
