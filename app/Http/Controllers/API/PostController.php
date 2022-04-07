@@ -43,7 +43,7 @@ class PostController extends BaseController
       return $this->sendError('Post not found.');
     }
 
-    return $this->sendResponse(new PostResource($post), 'Post retrieved successfully.');
+    return $this->sendResponse($post, 'Post retrieved successfully.');
   }
 
   public function update(Request $request, Post $post)
