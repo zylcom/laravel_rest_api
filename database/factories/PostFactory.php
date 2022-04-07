@@ -17,11 +17,11 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence(mt_rand(2, 8)),
-            'content' => $this->faker->paragraphs(mt_rand(5, 10), true),
-            'image' => $this->faker->imageUrl(),
+            'title' => 'Ini Title ' . range(1, 20),
+            'content' => 'Ini adalah content dari post ' . range(1, 20),
+            'image' => 'ini-image' . range(1, 20) . '.jpg',
             'user_id' => 1,
-            'category_id' => mt_rand(1, 3),
+            'category_id' => range(1, 3),
         ];
     }
 }
