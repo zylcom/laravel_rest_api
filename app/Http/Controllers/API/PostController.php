@@ -14,7 +14,7 @@ class PostController extends BaseController
   {
     $posts = Post::all();
 
-    return $this->sendResponse(PostResource::collection($posts), 'Posts retrieved successfully.');
+    return $this->sendResponse(PostResource::collection(Post::paginate(5)), 'Posts retrieved successfully.');
   }
 
   public function store(Request $request)
@@ -37,7 +37,7 @@ class PostController extends BaseController
 
   public function show($id)
   {
-    $post = Post::find($id);
+    $post = Post::find($id)->makeHidden(['user_id', 'category_id']);
 
     if (is_null($post)) {
       return $this->sendError('Post not found.');
