@@ -23,7 +23,7 @@ class PostController extends BaseController
     $input = $request->all();
 
     $validator = Validator::make($input, [
-      'category_id' => 'required',
+      'category_id' => 'required|exists:categories,id',
       'title' => 'required|max:255',
       'content' => 'required',
     ]);
@@ -35,7 +35,7 @@ class PostController extends BaseController
     $input['user_id'] = Auth::user()->id;
     $post = Post::create($input);
 
-    return $this->sendResponse(new PostResource($post), 'Post created successfully.');
+    return $this->sendResponse($post, 'Post created successfully.');
   }
 
   public function show($id)
