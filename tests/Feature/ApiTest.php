@@ -17,6 +17,12 @@ class ApiTest extends TestCase
    */
   public function testBearer()
   {
+    Artisan::call('migrate:fresh');
+    Artisan::call('db:seed');
+
+    Artisan::call('passport:client --password');
+    Artisan::call('passport:client --personal');
+
     $client_id = 1;
     $client_secret = DB::table('oauth_clients')->where('id', $client_id)->value('secret');
 
@@ -819,11 +825,5 @@ class ApiTest extends TestCase
       ],
       'message' => 'User login successfully.'
     ]);
-
-    Artisan::call('migrate:fresh');
-    Artisan::call('db:seed');
-
-    Artisan::call('passport:client --password');
-    Artisan::call('passport:client --personal');
   }
 }
